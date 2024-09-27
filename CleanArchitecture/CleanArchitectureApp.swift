@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct CleanArchitectureApp: App {
+    let movieRepository: MovieRepository
+    let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
+
+    init() {
+        self.movieRepository = MovieRepository()
+        self.getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MoviesView(viewModel: MoviesViewModel(getTopRatedMoviesUseCase: getTopRatedMoviesUseCase))
         }
     }
 }
