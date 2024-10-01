@@ -17,15 +17,27 @@ struct MoviesView: View {
             } else if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage).foregroundColor(.red)
             } else {
-                List(viewModel.movies) { movie in
-                    VStack(alignment: .leading) {
-                        Text(movie.title)
-                            .font(.headline)
-                        Text(movie.releaseDate)
-                            .font(.subheadline)
-                        Text(movie.overview)
-                            .font(.body)
-                            .lineLimit(3)
+                ScrollView {
+                    VStack (spacing: 0) {
+                        ForEach(viewModel.movies, id: \.id) { movie in
+                            Button {
+                                viewModel.toggleFavorite(movie: movie)
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text(movie.title)
+                                        .font(.headline)
+                                    Text(movie.releaseDate)
+                                        .font(.subheadline)
+                                    Text(movie.overview)
+                                        .font(.body)
+                                        .lineLimit(3)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                            }
+                            .background(viewModel.isFavorite(movie: movie) ? .green : .clear)
+                        }
                     }
                 }
             }
