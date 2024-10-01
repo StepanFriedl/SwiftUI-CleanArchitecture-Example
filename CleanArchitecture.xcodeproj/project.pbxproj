@@ -18,6 +18,7 @@
 		FD9B71842CA6AE2700374AA9 /* CleanArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */; };
 		FD9B71882CA6AE2900374AA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9B71872CA6AE2900374AA9 /* Assets.xcassets */; };
 		FD9B718B2CA6AE2900374AA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9B718A2CA6AE2900374AA9 /* Preview Assets.xcassets */; };
+		FDB752022CABF4F4002EF118 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FDB752012CABF4F4002EF118 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +35,7 @@
 		FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanArchitectureApp.swift; sourceTree = "<group>"; };
 		FD9B71872CA6AE2900374AA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD9B718A2CA6AE2900374AA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FDA21ABF2CABEDFB00A715B9 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FDB752012CABF4F4002EF118 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +144,7 @@
 				FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */,
 				FD9B71872CA6AE2900374AA9 /* Assets.xcassets */,
 				FD9B71892CA6AE2900374AA9 /* Preview Content */,
-				FDA21ABF2CABEDFB00A715B9 /* Config.xcconfig */,
+				FDB752012CABF4F4002EF118 /* Config.xcconfig */,
 			);
 			path = CleanArchitecture;
 			sourceTree = "<group>";
@@ -215,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD9B718B2CA6AE2900374AA9 /* Preview Assets.xcassets in Resources */,
+				FDB752022CABF4F4002EF118 /* Config.xcconfig in Resources */,
 				FD9B71882CA6AE2900374AA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +245,7 @@
 /* Begin XCBuildConfiguration section */
 		FD9B718C2CA6AE2900374AA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDA21ABF2CABEDFB00A715B9 /* Config.xcconfig */;
+			baseConfigurationReference = FDB752012CABF4F4002EF118 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -307,7 +309,7 @@
 		};
 		FD9B718D2CA6AE2900374AA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDA21ABF2CABEDFB00A715B9 /* Config.xcconfig */;
+			baseConfigurationReference = FDB752012CABF4F4002EF118 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -364,7 +366,7 @@
 		};
 		FD9B718F2CA6AE2900374AA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDA21ABF2CABEDFB00A715B9 /* Config.xcconfig */;
+			baseConfigurationReference = FDB752012CABF4F4002EF118 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -395,7 +397,7 @@
 		};
 		FD9B71902CA6AE2900374AA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDA21ABF2CABEDFB00A715B9 /* Config.xcconfig */;
+			baseConfigurationReference = FDB752012CABF4F4002EF118 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
