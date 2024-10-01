@@ -1,0 +1,8 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Xcode user state files
+*.xcuserstate
+
+# Ignore config file in CleanArchitecture folder
+CleanArchitecture/Config.xcconfig
