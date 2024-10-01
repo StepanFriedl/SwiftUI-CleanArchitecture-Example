@@ -9,17 +9,29 @@ import SwiftUI
 
 @main
 struct CleanArchitectureApp: App {
-    let movieRepository: MovieRepository
-    let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
-
+    @StateObject private var viewModel: MoviesViewModel
+    
     init() {
-        self.movieRepository = MovieRepository()
-        self.getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
+        let movieRepository: MovieRepository = MovieRepository()
+        let getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
+        _viewModel = StateObject(wrappedValue: MoviesViewModel(getTopRatedMoviesUseCase: getTopRatedMoviesUseCase))
     }
+    
+
 
     var body: some Scene {
         WindowGroup {
-            MoviesView(viewModel: MoviesViewModel(getTopRatedMoviesUseCase: getTopRatedMoviesUseCase))
+            TabView {
+                MoviesView(viewModel: viewModel)
+                    .tabItem {
+                        Label("Movies", systemImage: "film")
+                    }
+                
+                FavoritesView(viewModel: viewModel)
+                    .tabItem {
+                        Label("Favorites", systemImage: "star.fill")
+                    }
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class MovieRepository: MovieRepositoryProtocol {
-    private let apiKey = "5fa2d8f6f4c8c4682dde1e813d9b1155"
+    private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String ?? ""
     
     func fetchTopRatedMovies() async throws -> [Movie] {
         let urlString = "https://api.themoviedb.org/3/movie/top_rated?api_key=\(apiKey)"
