@@ -64,7 +64,7 @@ CleanArchitectureExample/
 ```
 
 ### Layers Explained
-<img src="images/Clean%20architecture.png" alt="Clean Architecture" style="max-height: 300px;">
+<img src="images/clean-architecture.png" alt="Clean Architecture" style="max-height: 300px;">
 
 - **Protocols**: Define the interfaces for the Use Case and Repository.
 - **Use Case**: Implements the business logic for fetching top-rated movies from the API.

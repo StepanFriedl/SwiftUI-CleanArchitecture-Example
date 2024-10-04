@@ -9,4 +9,5 @@ import Foundation
 
 protocol MovieRepositoryProtocol {
     func fetchTopRatedMovies() async throws -> [Movie]
+    func fetchTopRatedMoviesFromCoreData() throws -> [Movie]
 }
