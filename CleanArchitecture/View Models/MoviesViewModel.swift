@@ -22,10 +22,10 @@ class MoviesViewModel: ObservableObject {
         loadFavorites()
     }
     
-    func loadMovies() async {
+    func loadMovies(refresh: Bool) async {
         isLoading = true
         do {
-            movies = try await getTopRatedMoviesUseCase.execute()
+            movies = try await getTopRatedMoviesUseCase.execute(refresh: refresh)
         } catch {
             errorMessage = "Failed to load movies"
         }

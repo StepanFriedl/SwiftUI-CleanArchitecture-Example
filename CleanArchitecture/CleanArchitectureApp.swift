@@ -9,15 +9,14 @@ import SwiftUI
 
 @main
 struct CleanArchitectureApp: App {
+    private var diContainer: DIContainer
     @StateObject private var viewModel: MoviesViewModel
-    
-    init() {
-        let movieRepository: MovieRepository = MovieRepository()
-        let getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
-        _viewModel = StateObject(wrappedValue: MoviesViewModel(getTopRatedMoviesUseCase: getTopRatedMoviesUseCase))
-    }
-    
 
+    init() {
+        let diContainer = DIContainer()
+        self.diContainer = diContainer
+        _viewModel = StateObject(wrappedValue: MoviesViewModel(getTopRatedMoviesUseCase: diContainer.getTopRatedMoviesUseCase))
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -31,6 +30,12 @@ struct CleanArchitectureApp: App {
                     .tabItem {
                         Label("Favorites", systemImage: "star.fill")
                     }
+            }
+            .onAppear {
+                Task {
+                    await viewModel.loadMovies(refresh: false)
+                    // TODO: - Add settings for this later
+                }
             }
         }
     }

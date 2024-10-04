@@ -18,7 +18,11 @@
 		FD9B71842CA6AE2700374AA9 /* CleanArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */; };
 		FD9B71882CA6AE2900374AA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9B71872CA6AE2900374AA9 /* Assets.xcassets */; };
 		FD9B718B2CA6AE2900374AA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9B718A2CA6AE2900374AA9 /* Preview Assets.xcassets */; };
+		FDB056C62CAEDFEC00754D0A /* DIContainer.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB056C52CAEDFEC00754D0A /* DIContainer.swift.swift */; };
 		FDB752022CABF4F4002EF118 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FDB752012CABF4F4002EF118 /* Config.xcconfig */; };
+		FDB752062CAC34F0002EF118 /* AppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDB752042CAC34F0002EF118 /* AppDataModel.xcdatamodeld */; };
+		FDB752082CAC446E002EF118 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB752072CAC446E002EF118 /* PersistenceController.swift */; };
+		FDB7520A2CAC4546002EF118 /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB752092CAC4546002EF118 /* CoreDataExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +39,11 @@
 		FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanArchitectureApp.swift; sourceTree = "<group>"; };
 		FD9B71872CA6AE2900374AA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD9B718A2CA6AE2900374AA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FDB056C52CAEDFEC00754D0A /* DIContainer.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift.swift; sourceTree = "<group>"; };
 		FDB752012CABF4F4002EF118 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FDB752052CAC34F0002EF118 /* AppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppDataModel.xcdatamodel; sourceTree = "<group>"; };
+		FDB752072CAC446E002EF118 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		FDB752092CAC4546002EF118 /* CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +142,8 @@
 		FD9B71822CA6AE2700374AA9 /* CleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
+				FDB056C42CAEDFDE00754D0A /* DI */,
+				FDB752032CAC3491002EF118 /* Data Persistence */,
 				FD74288E2CABF011004291BF /* Info.plist */,
 				FD345BB92CA6B397005FE713 /* Protocols */,
 				FD345BB62CA6B0B1005FE713 /* Views */,
@@ -155,6 +165,24 @@
 				FD9B718A2CA6AE2900374AA9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FDB056C42CAEDFDE00754D0A /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				FDB056C52CAEDFEC00754D0A /* DIContainer.swift.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		FDB752032CAC3491002EF118 /* Data Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				FDB752042CAC34F0002EF118 /* AppDataModel.xcdatamodeld */,
+				FDB752072CAC446E002EF118 /* PersistenceController.swift */,
+				FDB752092CAC4546002EF118 /* CoreDataExtensions.swift */,
+			);
+			path = "Data Persistence";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,9 +258,13 @@
 			files = (
 				FD345BBF2CA6B7B5005FE713 /* GetTopRatedMoviesUseCaseProtocol.swift in Sources */,
 				FD345BC32CA6CFC2005FE713 /* GetTopRatedMoviesUseCase.swift in Sources */,
+				FDB7520A2CAC4546002EF118 /* CoreDataExtensions.swift in Sources */,
 				FD345BC12CA6B991005FE713 /* MovieRepository.swift in Sources */,
+				FDB056C62CAEDFEC00754D0A /* DIContainer.swift.swift in Sources */,
 				FD9B71842CA6AE2700374AA9 /* CleanArchitectureApp.swift in Sources */,
+				FDB752082CAC446E002EF118 /* PersistenceController.swift in Sources */,
 				FD345BBD2CA6B5E7005FE713 /* MovieRepositoryProtocol.swift in Sources */,
+				FDB752062CAC34F0002EF118 /* AppDataModel.xcdatamodeld in Sources */,
 				FD345BB82CA6B144005FE713 /* Movie.swift in Sources */,
 				FD345BC72CA6D425005FE713 /* MoviesView.swift in Sources */,
 				FD345BC52CA6D398005FE713 /* MoviesViewModel.swift in Sources */,
@@ -382,6 +414,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -413,6 +446,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,6 +482,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FDB752042CAC34F0002EF118 /* AppDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FDB752052CAC34F0002EF118 /* AppDataModel.xcdatamodel */,
+			);
+			currentVersion = FDB752052CAC34F0002EF118 /* AppDataModel.xcdatamodel */;
+			name = AppDataModel.xcdatamodeld;
+			path = "/Users/stepan/Documents/Private.nosync/CleanArchitecture/CleanArchitecture/Data Persistence/AppDataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FD9B71782CA6AE2700374AA9 /* Project object */;
 }

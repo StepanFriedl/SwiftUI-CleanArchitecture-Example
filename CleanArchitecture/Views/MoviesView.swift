@@ -42,10 +42,5 @@ struct MoviesView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                await viewModel.loadMovies()
-            }
-        }
     }
 }

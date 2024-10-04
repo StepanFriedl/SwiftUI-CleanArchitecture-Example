@@ -8,5 +8,5 @@
 import Foundation
 
 protocol GetTopRatedMoviesUseCaseProtocol {
-    func execute() async throws -> [Movie]
+    func execute(refresh: Bool) async throws -> [Movie]
 }
