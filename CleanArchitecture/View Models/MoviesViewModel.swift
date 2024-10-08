@@ -15,11 +15,25 @@ class MoviesViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     private let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
+    private let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     private let favoritesKey = "favoriteMovies"
     
-    init(getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol) {
+    init(
+        getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol,
+        refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
+    ) {
         self.getTopRatedMoviesUseCase = getTopRatedMoviesUseCase
+        self.refreshTopRatedMoviesUseCase = refreshTopRatedMoviesUseCase
         loadFavorites()
+    }
+    
+    func refreshMovies() async {
+        do {
+            let refreshedMovies = try await refreshTopRatedMoviesUseCase.refresh()
+            movies = refreshedMovies
+        } catch {
+            errorMessage = "Failed to refresh movies"
+        }
     }
     
     func loadMovies(refresh: Bool) async {

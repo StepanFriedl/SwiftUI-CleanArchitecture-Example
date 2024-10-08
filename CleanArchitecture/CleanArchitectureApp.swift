@@ -15,25 +15,30 @@ struct CleanArchitectureApp: App {
     init() {
         let diContainer = DIContainer()
         self.diContainer = diContainer
-        _viewModel = StateObject(wrappedValue: MoviesViewModel(getTopRatedMoviesUseCase: diContainer.getTopRatedMoviesUseCase))
+        _viewModel = StateObject(wrappedValue: MoviesViewModel(
+            getTopRatedMoviesUseCase: diContainer.getTopRatedMoviesUseCase,
+            refreshTopRatedMoviesUseCase: diContainer.refreshTopRatedMoviesUseCase
+        ))
     }
 
     var body: some Scene {
         WindowGroup {
-            TabView {
-                MoviesView(viewModel: viewModel)
-                    .tabItem {
-                        Label("Movies", systemImage: "film")
-                    }
-                
-                FavoritesView(viewModel: viewModel)
-                    .tabItem {
-                        Label("Favorites", systemImage: "star.fill")
-                    }
+            NavigationStack {
+                TabView {
+                    MoviesView(viewModel: viewModel)
+                        .tabItem {
+                            Label("Movies", systemImage: "film")
+                        }
+                    
+                    FavoritesView(viewModel: viewModel)
+                        .tabItem {
+                            Label("Favorites", systemImage: "star.fill")
+                        }
+                }
             }
             .onAppear {
                 Task {
-                    await viewModel.loadMovies(refresh: false)
+                    await viewModel.loadMovies(refresh: true)
                     // TODO: - Add settings for this later
                 }
             }

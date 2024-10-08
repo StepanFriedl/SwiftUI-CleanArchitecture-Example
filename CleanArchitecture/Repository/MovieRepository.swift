@@ -17,7 +17,7 @@ class MovieRepository: MovieRepositoryProtocol {
     }
     
     func fetchTopRatedMovies() async throws -> [Movie] {
-        let urlString = "https://api.themoviedb.org/3/movie/top_rated?api_key=\(apiKey)"
+        let urlString = "\(Urls.serverURL)\(Urls.topRated)?api_key=\(apiKey)"
         print("Going to make the request: \(urlString)")
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
