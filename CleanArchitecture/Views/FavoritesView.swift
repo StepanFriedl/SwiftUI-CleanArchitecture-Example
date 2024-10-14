@@ -13,7 +13,7 @@ struct FavoritesView: View {
     var body: some View {
         ScrollView {
             VStack (spacing: 0) {
-                ForEach(viewModel.movies.filter { viewModel.isFavorite(movie: $0) }, id: \.id) { movie in
+                ForEach(viewModel.topRatedMovies.filter { viewModel.isFavorite(movie: $0) }, id: \.id) { movie in
                     VStack(alignment: .leading) {
                         Text(movie.title)
                             .font(.headline)

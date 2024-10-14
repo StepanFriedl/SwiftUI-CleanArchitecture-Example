@@ -17,7 +17,9 @@ struct CleanArchitectureApp: App {
         self.diContainer = diContainer
         _viewModel = StateObject(wrappedValue: MoviesViewModel(
             getTopRatedMoviesUseCase: diContainer.getTopRatedMoviesUseCase,
-            refreshTopRatedMoviesUseCase: diContainer.refreshTopRatedMoviesUseCase
+            getOnTheAirMoviesUseCase: diContainer.getOnTheAirMoviesUseCase,
+            refreshTopRatedMoviesUseCase: diContainer.refreshTopRatedMoviesUseCase,
+            refreshOnTheAirMoviesUseCase: diContainer.refreshOnTheAirMoviesUseCase
         ))
     }
 
@@ -38,7 +40,8 @@ struct CleanArchitectureApp: App {
             }
             .onAppear {
                 Task {
-                    await viewModel.loadMovies(refresh: true)
+                    await viewModel.loadTopRatedMovies(refresh: true)
+                    await viewModel.loadOnTheAirMovies(refresh: true)
                     // TODO: - Add settings for this later
                 }
             }

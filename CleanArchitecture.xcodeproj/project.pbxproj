@@ -22,6 +22,11 @@
 		FD43C3022CB0385B00045907 /* RefreshTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43C3012CB0385B00045907 /* RefreshTopRatedMoviesUseCase.swift */; };
 		FD43C3042CB0387B00045907 /* RefreshTopRatedMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43C3032CB0387B00045907 /* RefreshTopRatedMoviesUseCaseProtocol.swift */; };
 		FD43C3062CB03DF800045907 /* CustomRefreshableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43C3052CB03DF800045907 /* CustomRefreshableView.swift */; };
+		FD470EF92CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD470EF82CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift */; };
+		FD470F032CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD470F022CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift */; };
+		FD67AE942CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE932CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift */; };
+		FD67AE962CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE952CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift */; };
+		FD67AE982CBD2B0C00071A84 /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE972CBD2B0C00071A84 /* MovieListView.swift */; };
 		FD7B025D2CA6E8280035DE19 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7B025C2CA6E8280035DE19 /* FavoritesView.swift */; };
 		FD9B71842CA6AE2700374AA9 /* CleanArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */; };
 		FD9B71882CA6AE2900374AA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9B71872CA6AE2900374AA9 /* Assets.xcassets */; };
@@ -48,6 +53,11 @@
 		FD43C3012CB0385B00045907 /* RefreshTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
 		FD43C3032CB0387B00045907 /* RefreshTopRatedMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTopRatedMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
 		FD43C3052CB03DF800045907 /* CustomRefreshableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshableView.swift; sourceTree = "<group>"; };
+		FD470EF82CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOnTheAirMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
+		FD470F022CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOnTheAirMoviesUseCase.swift; sourceTree = "<group>"; };
+		FD67AE932CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshOnTheAirMoviesUseCase.swift; sourceTree = "<group>"; };
+		FD67AE952CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshOnTheAirMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
+		FD67AE972CBD2B0C00071A84 /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
 		FD74288E2CABF011004291BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FD7B025C2CA6E8280035DE19 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		FD9B71802CA6AE2700374AA9 /* CleanArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +104,8 @@
 			children = (
 				FD345BC22CA6CFC2005FE713 /* GetTopRatedMoviesUseCase.swift */,
 				FD43C3012CB0385B00045907 /* RefreshTopRatedMoviesUseCase.swift */,
+				FD470F022CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift */,
+				FD67AE932CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift */,
 			);
 			path = "Use Case";
 			sourceTree = "<group>";
@@ -114,6 +126,7 @@
 				FD43C2F52CB0219C00045907 /* MovieDetailsView.swift */,
 				FD43C2FF2CB032F600045907 /* StarRatingView.swift */,
 				FD43C3052CB03DF800045907 /* CustomRefreshableView.swift */,
+				FD67AE972CBD2B0C00071A84 /* MovieListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -140,6 +153,8 @@
 			children = (
 				FD345BBE2CA6B7B5005FE713 /* GetTopRatedMoviesUseCaseProtocol.swift */,
 				FD43C3032CB0387B00045907 /* RefreshTopRatedMoviesUseCaseProtocol.swift */,
+				FD470EF82CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift */,
+				FD67AE952CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift */,
 			);
 			path = "Use Case";
 			sourceTree = "<group>";
@@ -304,12 +319,17 @@
 				FD9B71842CA6AE2700374AA9 /* CleanArchitectureApp.swift in Sources */,
 				FDB752082CAC446E002EF118 /* PersistenceController.swift in Sources */,
 				FD43C2FE2CB02DD800045907 /* Constants.swift in Sources */,
+				FD470F032CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift in Sources */,
+				FD67AE982CBD2B0C00071A84 /* MovieListView.swift in Sources */,
+				FD67AE962CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift in Sources */,
 				FD43C2FC2CB02D9400045907 /* URLHelpers.swift in Sources */,
 				FD345BBD2CA6B5E7005FE713 /* MovieRepositoryProtocol.swift in Sources */,
 				FDB752062CAC34F0002EF118 /* AppDataModel.xcdatamodeld in Sources */,
 				FD345BB82CA6B144005FE713 /* Movie.swift in Sources */,
 				FD43C3022CB0385B00045907 /* RefreshTopRatedMoviesUseCase.swift in Sources */,
 				FD345BC72CA6D425005FE713 /* MoviesView.swift in Sources */,
+				FD470EF92CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift in Sources */,
+				FD67AE942CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift in Sources */,
 				FD43C2F62CB0219C00045907 /* MovieDetailsView.swift in Sources */,
 				FD345BC52CA6D398005FE713 /* MoviesViewModel.swift in Sources */,
 				FD7B025D2CA6E8280035DE19 /* FavoritesView.swift in Sources */,

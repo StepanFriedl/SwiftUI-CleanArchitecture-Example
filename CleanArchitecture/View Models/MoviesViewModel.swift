@@ -7,43 +7,86 @@
 
 import SwiftUI
 
+enum RankingType: String, CaseIterable {
+    case topRated = "Top Rated"
+    case onTheAir = "On the Air"
+}
+
 @MainActor
 class MoviesViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
-    @Published var isLoading = false
+    @Published var topRatedMovies: [Movie] = []
+    @Published var onTheAirMovies: [Movie] =  []
+    @Published var isTopRatedLoading = false
+    @Published var isOnTheAirLoading = false
     @Published var favoriteMovies: Set<Int> = []
-    @Published var errorMessage: String?
+    @Published var topRatedErrorMessage: String?
+    @Published var onTheAirErrorMessage: String?
+    @Published var rankingType: RankingType = .topRated
 
     private let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
     private let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
+    private let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
+    private let refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
+    
     private let favoritesKey = "favoriteMovies"
     
     init(
         getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol,
-        refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
+        getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol,
+        refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol,
+        refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
     ) {
         self.getTopRatedMoviesUseCase = getTopRatedMoviesUseCase
         self.refreshTopRatedMoviesUseCase = refreshTopRatedMoviesUseCase
+        self.getOnTheAirMoviesUseCase = getOnTheAirMoviesUseCase
+        self.refreshOnTheAirMoviesUseCase = refreshOnTheAirMoviesUseCase
         loadFavorites()
     }
     
-    func refreshMovies() async {
+    func refreshTopRatedMovies() async {
         do {
             let refreshedMovies = try await refreshTopRatedMoviesUseCase.refresh()
-            movies = refreshedMovies
+            topRatedMovies = refreshedMovies
         } catch {
-            errorMessage = "Failed to refresh movies"
+            topRatedErrorMessage = "Failed to refresh movies"
         }
     }
     
-    func loadMovies(refresh: Bool) async {
-        isLoading = true
+    func refreshOnTheAirMovies() async {
         do {
-            movies = try await getTopRatedMoviesUseCase.execute(refresh: refresh)
+            let refreshedMovies = try await refreshOnTheAirMoviesUseCase.refresh()
+            topRatedMovies = refreshedMovies
         } catch {
-            errorMessage = "Failed to load movies"
+            onTheAirErrorMessage = "Failed to refresh movies"
         }
-        isLoading = false
+    }
+    
+    func loadOnTheAirMovies(refresh: Bool) async {
+        DispatchQueue.main.async {
+            self.isOnTheAirLoading = true
+        }
+        do {
+            onTheAirMovies = try await getOnTheAirMoviesUseCase.execute(refresh: refresh)
+        } catch {
+            onTheAirErrorMessage = "Failed to load movies"
+        }
+        DispatchQueue.main.async {
+            self.isOnTheAirLoading = false
+        }
+    }
+    
+    func loadTopRatedMovies(refresh: Bool) async {
+        DispatchQueue.main.async {
+            self.isTopRatedLoading = true
+        }
+        do {
+            topRatedMovies = try await getTopRatedMoviesUseCase.execute(refresh: refresh)
+        } catch {
+            topRatedErrorMessage = "Failed to load movies"
+        }
+        DispatchQueue.main.async {
+            self.isTopRatedLoading = false
+        }
     }
     
     func toggleFavorite(movie: Movie) {
