@@ -9,36 +9,39 @@ import SwiftUI
 
 struct MoviesView: View {
     @StateObject var viewModel: MoviesViewModel
-
+    
     var body: some View {
         VStack {
-            if viewModel.isLoading {
-                ProgressView("Loading...")
-            } else if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage).foregroundColor(.red)
-            } else {
-                List(viewModel.movies, id: \.id) { movie in
-                    NavigationLink(destination: MovieDetailsView(movie: movie)) {
-                        VStack(alignment: .leading) {
-                            Text(movie.title)
-                                .font(.headline)
-                            Text(movie.releaseDate)
-                                .font(.subheadline)
-                            Text(movie.overview)
-                                .font(.body)
-                                .lineLimit(3)
-                        }
-                    }
-                    .listRowBackground(Color.clear)
+            Picker("Ranking type", selection: $viewModel.rankingType) {
+                ForEach(RankingType.allCases, id: \.self) { option in
+                    Text(option.rawValue)
                 }
-                .refreshable {
-                    Task {
-                        await viewModel.refreshMovies()
-                    }
-                }
-                .listStyle(PlainListStyle())
-                .background(Color.clear)
             }
+            .pickerStyle(SegmentedPickerStyle())
+            
+            ZStack {
+                switch viewModel.rankingType {
+                case .topRated:
+                    if viewModel.isTopRatedLoading {
+                        ProgressView("Loading...")
+                    } else if let errorMessage = viewModel.topRatedErrorMessage {
+                        Text(errorMessage)
+                            .foregroundStyle(.red)
+                    } else {
+                        MovieListView(movies: viewModel.topRatedMovies, refreshAction: viewModel.refreshTopRatedMovies)
+                    }
+                case .onTheAir:
+                    if viewModel.isOnTheAirLoading {
+                        ProgressView("Loading...")
+                    } else if let errorMessage = viewModel.onTheAirErrorMessage {
+                        Text(errorMessage)
+                            .foregroundStyle(.red)
+                    } else {
+                        MovieListView(movies: viewModel.onTheAirMovies, refreshAction: viewModel.refreshOnTheAirMovies)
+                    }
+                }
+            }
+            .frame(maxHeight: .infinity)
         }
     }
 }

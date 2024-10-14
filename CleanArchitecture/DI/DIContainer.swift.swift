@@ -12,11 +12,15 @@ class DIContainer {
     let movieRepository: MovieRepositoryProtocol
     let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
     let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
+    let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
+    let refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
     
     init() {
         persistenceController = PersistenceController()
         movieRepository = MovieRepository(context: persistenceController.container.viewContext)
         getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
         refreshTopRatedMoviesUseCase = RefreshTopRatedMoviesUseCase(movieRepository: movieRepository)
+        getOnTheAirMoviesUseCase = GetOnTheAirMoviesUseCase(movieRepository: movieRepository)
+        refreshOnTheAirMoviesUseCase = RefreshOnTheAirMoviesUseCase(movieRepository: movieRepository)
     }
 }
