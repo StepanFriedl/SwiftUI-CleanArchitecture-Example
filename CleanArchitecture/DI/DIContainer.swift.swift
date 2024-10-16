@@ -14,6 +14,8 @@ class DIContainer {
     let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
     let refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
+    let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
+    let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     
     init() {
         persistenceController = PersistenceController()
@@ -22,5 +24,7 @@ class DIContainer {
         refreshTopRatedMoviesUseCase = RefreshTopRatedMoviesUseCase(movieRepository: movieRepository)
         getOnTheAirMoviesUseCase = GetOnTheAirMoviesUseCase(movieRepository: movieRepository)
         refreshOnTheAirMoviesUseCase = RefreshOnTheAirMoviesUseCase(movieRepository: movieRepository)
+        toggleFavoriteMovieUseCase = ToggleFavoriteMovieUseCase(repository: movieRepository)
+        getFavoriteMoviesUseCase = GetFavoriteMoviesUseCase(repository: movieRepository)
     }
 }

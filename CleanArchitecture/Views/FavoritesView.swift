@@ -11,30 +11,33 @@ struct FavoritesView: View {
     @StateObject var viewModel: MoviesViewModel
 
     var body: some View {
-        ScrollView {
-            VStack (spacing: 0) {
-                ForEach(viewModel.topRatedMovies.filter { viewModel.isFavorite(movie: $0) }, id: \.id) { movie in
-                    VStack(alignment: .leading) {
-                        Text(movie.title)
-                            .font(.headline)
-                        Text(movie.releaseDate)
-                            .font(.subheadline)
-                        Text(movie.overview)
-                            .font(.body)
-                            .lineLimit(3)
+        VStack {
+            if viewModel.favoriteMoviesList.count > 0 {
+                MovieListView(
+                    moviesViewModel: viewModel,
+                    movies: viewModel.favoriteMoviesList,
+                    refreshAction: viewModel.loadFavoriteMovies,
+                    deleteAction: { movieID in
+                        viewModel.toggleFavorite(forID: movieID, deleteOnly: true)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
+                )
+            } else {
+                VStack {
+                    Text("No movies to display. Please try again later!")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
                     
-                    Divider()
+                    Spacer()
                 }
+                .padding(64)
             }
         }
     }
 }
 
 
-//#Preview {
-//    FavoritesView()
-//}
+#Preview {
+    let moviesViewModel = MockMoviesViewModel()
+    
+    return FavoritesView(viewModel: moviesViewModel)
+}

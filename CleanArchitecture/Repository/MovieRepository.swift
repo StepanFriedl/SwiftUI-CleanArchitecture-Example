@@ -9,6 +9,7 @@ import CoreData
 import Foundation
 
 class MovieRepository: MovieRepositoryProtocol {
+    
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String ?? ""
     private let context: NSManagedObjectContext
 
@@ -87,6 +88,25 @@ class MovieRepository: MovieRepositoryProtocol {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = TopRatedMoviesEntity.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         try context.execute(deleteRequest)
+    }
+    
+    func getFavoriteMovieIDs() -> Set<Int> {
+        guard let savedFavoriteIDs = UserDefaults.standard.array(forKey: UserDefaultsKeys.favorites) as? [Int] else { return [] }
+        return Set(savedFavoriteIDs)
+    }
+    
+    func saveFavoriteMovieID(_ movieID: Int) {
+        var favorites = self.getFavoriteMovieIDs()
+        favorites.insert(movieID)
+        
+        UserDefaults.standard.set(Array(favorites), forKey: UserDefaultsKeys.favorites)
+    }
+    
+    func removeFavoriteMovieID(_ movieID: Int) {
+        var favorites = self.getFavoriteMovieIDs()
+        favorites.remove(movieID)
+        
+        UserDefaults.standard.set(Array(favorites), forKey: UserDefaultsKeys.favorites)
     }
 }
 

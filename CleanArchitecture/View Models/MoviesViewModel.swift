@@ -16,9 +16,9 @@ enum RankingType: String, CaseIterable {
 class MoviesViewModel: ObservableObject {
     @Published var topRatedMovies: [Movie] = []
     @Published var onTheAirMovies: [Movie] =  []
+    @Published var favoriteMoviesList: [Movie] = []
     @Published var isTopRatedLoading = false
     @Published var isOnTheAirLoading = false
-    @Published var favoriteMovies: Set<Int> = []
     @Published var topRatedErrorMessage: String?
     @Published var onTheAirErrorMessage: String?
     @Published var rankingType: RankingType = .topRated
@@ -27,20 +27,47 @@ class MoviesViewModel: ObservableObject {
     private let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     private let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
     private let refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
-    
-    private let favoritesKey = "favoriteMovies"
+    private let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
+    private let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     
     init(
         getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol,
         getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol,
         refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol,
-        refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
+        refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol,
+        toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol,
+        getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     ) {
         self.getTopRatedMoviesUseCase = getTopRatedMoviesUseCase
         self.refreshTopRatedMoviesUseCase = refreshTopRatedMoviesUseCase
         self.getOnTheAirMoviesUseCase = getOnTheAirMoviesUseCase
         self.refreshOnTheAirMoviesUseCase = refreshOnTheAirMoviesUseCase
-        loadFavorites()
+        self.toggleFavoriteMovieUseCase = toggleFavoriteMovieUseCase
+        self.getFavoriteMoviesUseCase = getFavoriteMoviesUseCase
+        self.loadFavoriteMovies()
+        Task {
+            await self.loadTopRatedMovies(refresh: true)
+            await self.loadOnTheAirMovies(refresh: true)
+            // TODO: - Add settings for this later
+        }
+    }
+    
+    func loadFavoriteMovies() {
+        do {
+            favoriteMoviesList = try getFavoriteMoviesUseCase.execute()
+        } catch {
+            print("Loading favorite movies failed")
+            // TODO: - Add error handling
+        }
+    }
+    
+    func toggleFavorite(forID movieID: Int, deleteOnly: Bool = false) {
+        toggleFavoriteMovieUseCase.toggleFavorite(movieID: movieID, deleteOnly: deleteOnly)
+        loadFavoriteMovies()
+    }
+    
+    func isFavorite(movieID: Int) -> Bool {
+        return favoriteMoviesList.contains(where: { $0.id == movieID })
     }
     
     func refreshTopRatedMovies() async {
@@ -86,30 +113,6 @@ class MoviesViewModel: ObservableObject {
         }
         DispatchQueue.main.async {
             self.isTopRatedLoading = false
-        }
-    }
-    
-    func toggleFavorite(movie: Movie) {
-        if favoriteMovies.contains(movie.id) {
-            favoriteMovies.remove(movie.id)
-        } else {
-            favoriteMovies.insert(movie.id)
-        }
-        saveFavorites()
-    }
-    
-    func isFavorite(movie: Movie) -> Bool {
-        return favoriteMovies.contains(movie.id)
-    }
-    
-    private func saveFavorites() {
-        let favoriteIDs = Array(favoriteMovies)
-        UserDefaults.standard.set(favoriteIDs, forKey: favoritesKey)
-    }
-
-    private func loadFavorites() {
-        if let savedFavoriteIDs = UserDefaults.standard.array(forKey: favoritesKey) as? [Int] {
-            favoriteMovies = Set(savedFavoriteIDs)
         }
     }
 }

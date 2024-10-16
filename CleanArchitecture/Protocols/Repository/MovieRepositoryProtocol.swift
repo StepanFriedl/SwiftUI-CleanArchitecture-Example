@@ -12,4 +12,7 @@ protocol MovieRepositoryProtocol {
     func fetchTopRatedMoviesFromCoreData() throws -> [Movie]
     func fetchOnTheAirMovies() async throws -> [Movie]
     func fetchOnTheAirMoviesFromCoreData() throws -> [Movie]
+    func getFavoriteMovieIDs() -> Set<Int>
+    func saveFavoriteMovieID(_ movieID: Int)
+    func removeFavoriteMovieID(_ movieID: Int)
 }

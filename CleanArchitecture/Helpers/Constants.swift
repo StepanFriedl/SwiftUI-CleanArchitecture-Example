@@ -13,3 +13,8 @@ struct Urls {
     static let topRated = "/3/movie/top_rated"
     static let onTheAir = "/3/tv/on_the_air"
 }
+
+struct UserDefaultsKeys {
+    static let favorites = "favoriteMovies"
+
+}

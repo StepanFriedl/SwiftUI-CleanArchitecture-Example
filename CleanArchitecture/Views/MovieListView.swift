@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct MovieListView: View {
+    @StateObject var moviesViewModel: MoviesViewModel
     let movies: [Movie]
     let refreshAction: () async -> Void
+    var deleteAction: ((_: Int) -> Void)? = nil
     
     var body: some View {
         if movies.count > 0 {
             List(movies, id: \.id) { movie in
-                NavigationLink(destination: MovieDetailsView(movie: movie)) {
+                NavigationLink(destination: MovieDetailsView(viewModel: moviesViewModel, movie: movie)) {
                     VStack(alignment: .leading) {
                         Text(movie.title)
                             .font(.headline)
@@ -26,6 +28,15 @@ struct MovieListView: View {
                     }
                 }
                 .listRowBackground(Color.clear)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    if let deleteAction = deleteAction {
+                        Button(role: .destructive) {
+                            deleteAction(movie.id)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+                }
             }
             .frame(maxHeight: .infinity)
             .refreshable {
@@ -39,9 +50,11 @@ struct MovieListView: View {
             VStack {
                 Text("No movies to display. Please try again later!")
                     .font(.body)
+                    .multilineTextAlignment(.center)
                 
                 Spacer()
             }
+            .padding(64)
         }
     }
 }
@@ -55,7 +68,10 @@ struct MovieListView: View {
         releaseDate: "2005-08-21",
         voteAverage: 4.8
     )
+    let moviesViewModel = MockMoviesViewModel()
+    
     return MovieListView(
+        moviesViewModel: moviesViewModel,
         movies: [movie],
         refreshAction: {}
     )
