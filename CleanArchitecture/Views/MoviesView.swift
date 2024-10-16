@@ -28,7 +28,11 @@ struct MoviesView: View {
                         Text(errorMessage)
                             .foregroundStyle(.red)
                     } else {
-                        MovieListView(movies: viewModel.topRatedMovies, refreshAction: viewModel.refreshTopRatedMovies)
+                        MovieListView(
+                            moviesViewModel: viewModel,
+                            movies: viewModel.topRatedMovies,
+                            refreshAction: viewModel.refreshTopRatedMovies
+                        )
                     }
                 case .onTheAir:
                     if viewModel.isOnTheAirLoading {
@@ -37,7 +41,11 @@ struct MoviesView: View {
                         Text(errorMessage)
                             .foregroundStyle(.red)
                     } else {
-                        MovieListView(movies: viewModel.onTheAirMovies, refreshAction: viewModel.refreshOnTheAirMovies)
+                        MovieListView(
+                            moviesViewModel: viewModel,
+                            movies: viewModel.onTheAirMovies,
+                            refreshAction: viewModel.refreshOnTheAirMovies
+                        )
                     }
                 }
             }

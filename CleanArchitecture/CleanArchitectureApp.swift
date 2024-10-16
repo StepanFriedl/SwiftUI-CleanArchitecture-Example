@@ -19,7 +19,9 @@ struct CleanArchitectureApp: App {
             getTopRatedMoviesUseCase: diContainer.getTopRatedMoviesUseCase,
             getOnTheAirMoviesUseCase: diContainer.getOnTheAirMoviesUseCase,
             refreshTopRatedMoviesUseCase: diContainer.refreshTopRatedMoviesUseCase,
-            refreshOnTheAirMoviesUseCase: diContainer.refreshOnTheAirMoviesUseCase
+            refreshOnTheAirMoviesUseCase: diContainer.refreshOnTheAirMoviesUseCase,
+            toggleFavoriteMovieUseCase: diContainer.toggleFavoriteMovieUseCase,
+            getFavoriteMoviesUseCase: diContainer.getFavoriteMoviesUseCase
         ))
     }
 
@@ -36,13 +38,6 @@ struct CleanArchitectureApp: App {
                         .tabItem {
                             Label("Favorites", systemImage: "star.fill")
                         }
-                }
-            }
-            .onAppear {
-                Task {
-                    await viewModel.loadTopRatedMovies(refresh: true)
-                    await viewModel.loadOnTheAirMovies(refresh: true)
-                    // TODO: - Add settings for this later
                 }
             }
         }

@@ -9,6 +9,8 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct MovieDetailsView: View {
+    @StateObject var viewModel: MoviesViewModel
+    
     let movie: Movie
     
     var body: some View {
@@ -19,7 +21,13 @@ struct MovieDetailsView: View {
                     VStack (spacing: 16) {
                         moviePoster(aspectRatio: 3/2)
                         releaseDate()
-                        movieRating()
+                        HStack {
+                            Spacer()
+                            movieRating()
+                            Spacer()
+                            favoriteButton()
+                            Spacer()
+                        }
                         movieOverview()
                     }
                 }
@@ -30,7 +38,13 @@ struct MovieDetailsView: View {
                     moviePoster(aspectRatio: 3/4)
                     
                     ScrollView {
-                        movieRating()
+                        HStack {
+                            Spacer()
+                            movieRating()
+                            Spacer()
+                            favoriteButton()
+                            Spacer()
+                        }
                         releaseDate()
                         movieOverview()
                     }
@@ -38,9 +52,6 @@ struct MovieDetailsView: View {
             }
         }
         .navigationTitle(movie.title)
-        .onAppear {
-            print(createImageUrl(path: movie.posterPath)!)
-        }
     }
     
     func moviePoster(aspectRatio: Double) -> some View {
@@ -78,6 +89,15 @@ struct MovieDetailsView: View {
             .multilineTextAlignment(.leading)
             .padding(.horizontal)
     }
+    
+    func favoriteButton() -> some View {
+        Button {
+            viewModel.toggleFavorite(forID: movie.id)
+        } label: {
+            Image(systemName: viewModel.isFavorite(movieID: movie.id) ? "bookmark.fill" : "bookmark")
+        }
+        .foregroundStyle(.primary)
+    }
 }
 
 #Preview {
@@ -89,8 +109,10 @@ struct MovieDetailsView: View {
         releaseDate: "1994-09-23",
         voteAverage: 2.0
     )
+    let moviesViewModel = MockMoviesViewModel()
     
     return MovieDetailsView(
+        viewModel: moviesViewModel,
         movie: movie
     )
 }
