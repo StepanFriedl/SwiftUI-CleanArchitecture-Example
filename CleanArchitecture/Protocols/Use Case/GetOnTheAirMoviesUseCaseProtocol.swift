@@ -9,5 +9,6 @@ import Foundation
 
 
 protocol GetOnTheAirMoviesUseCaseProtocol {
-    func execute(refresh: Bool) async throws -> [Movie]
+    func load(useCached: Bool) async throws -> [Movie]
+    func loadNextPage() async throws -> [Movie]
 }

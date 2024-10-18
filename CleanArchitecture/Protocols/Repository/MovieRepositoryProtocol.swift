@@ -15,4 +15,6 @@ protocol MovieRepositoryProtocol {
     func getFavoriteMovieIDs() -> Set<Int>
     func saveFavoriteMovieID(_ movieID: Int)
     func removeFavoriteMovieID(_ movieID: Int)
+    func resetNextPageToLoadOnTheAirMovies()
+    func clearOnTheAirMoviesFromCoreData() throws
 }

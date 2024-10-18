@@ -14,7 +14,6 @@ class MockMoviesViewModel: MoviesViewModel {
             getTopRatedMoviesUseCase: MockGetTopRatedMoviesUseCase(),
             getOnTheAirMoviesUseCase: MockGetOnTheAirMoviesUseCase(),
             refreshTopRatedMoviesUseCase: MockRefreshTopRatedMoviesUseCase(),
-            refreshOnTheAirMoviesUseCase: MockRefreshOnTheAirMoviesUseCase(),
             toggleFavoriteMovieUseCase: MockToggleFavoriteMovieUseCase(),
             getFavoriteMoviesUseCase: MockGetFavoriteMoviesUseCase()
         )

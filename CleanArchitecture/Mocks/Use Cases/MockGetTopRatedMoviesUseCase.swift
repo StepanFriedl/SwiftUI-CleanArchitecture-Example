@@ -8,7 +8,7 @@
 import Foundation
 
 class MockGetTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol {
-    func execute(refresh: Bool) async throws -> [Movie] {
+    func load(useCached: Bool) async throws -> [Movie] {
         return [
             Movie(
                 id: 1,

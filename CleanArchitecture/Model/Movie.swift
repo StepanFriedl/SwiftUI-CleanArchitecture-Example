@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Identifiable, Decodable {
+struct Movie: Identifiable, Decodable, Equatable {
     let id: Int
     let title: String
     let overview: String
@@ -56,5 +56,16 @@ struct Movie: Identifiable, Decodable {
         self.posterPath = posterPath
         self.releaseDate = releaseDate
         self.voteAverage = voteAverage
+    }
+    
+    func getReleaseYear() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: releaseDate) {
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: date)
+            return String(year)
+        }
+        return ""
     }
 }

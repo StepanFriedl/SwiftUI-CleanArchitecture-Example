@@ -32,6 +32,9 @@ struct FavoritesView: View {
                 .padding(64)
             }
         }
+        .onAppear {
+            viewModel.loadFavoriteMovies()
+        }
     }
 }
 

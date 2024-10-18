@@ -6,9 +6,11 @@
 //
 
 import CoreData
-import Foundation
+import SwiftUI
 
 class MovieRepository: MovieRepositoryProtocol {
+    @AppStorage("nextOnTheAirPageToLoad") var nextOnTheAirPageToLoad: Int = 1
+    @AppStorage("totalOnTheAirPages") var totalOnTheAirPages: Int = 999
     
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String ?? ""
     private let context: NSManagedObjectContext
@@ -18,23 +20,27 @@ class MovieRepository: MovieRepositoryProtocol {
     }
     
     func fetchOnTheAirMovies() async throws -> [Movie] {
-        let urlString = "\(Urls.serverURL)\(Urls.onTheAir)?api_key=\(apiKey)"
-        print("Going to make the request: \(urlString)")
+        guard nextOnTheAirPageToLoad <= totalOnTheAirPages else {
+            return []
+        }
+        let urlString = "\(Urls.serverURL)\(Urls.onTheAir)?api_key=\(apiKey)&page=\(nextOnTheAirPageToLoad)"
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
         }
-        
         let (data, _) = try await URLSession.shared.data(from: url)
-        
         let decodedResponse = try JSONDecoder().decode(OnTheAirMoviesResponse.self, from: data)
         let results = decodedResponse.results
+        guard !results.isEmpty else {
+            throw NSError(domain: "NoMoviesError", code: 404, userInfo: [NSLocalizedDescriptionKey: "No movies found"])
+        }
         try saveOnTheAirMoviesToCoreData(results)
+        totalOnTheAirPages = decodedResponse.totalPages
+        nextOnTheAirPageToLoad += 1
         return results
     }
     
     func fetchTopRatedMovies() async throws -> [Movie] {
         let urlString = "\(Urls.serverURL)\(Urls.topRated)?api_key=\(apiKey)"
-        print("Going to make the request: \(urlString)")
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
         }
@@ -47,21 +53,19 @@ class MovieRepository: MovieRepositoryProtocol {
     }
     
     func fetchOnTheAirMoviesFromCoreData() throws -> [Movie] {
-        print("Going to fetch on the air movies from the CoreData")
         let fetchRequest: NSFetchRequest<OnTheAirMoviesEntity> = OnTheAirMoviesEntity.fetchRequest()
         let moviesEntity = try context.fetch(fetchRequest)
         return moviesEntity.map { $0.toMovie() }
     }
     
     func fetchTopRatedMoviesFromCoreData() throws -> [Movie] {
-        print("Going to fetch top rated movies from the CoreData")
         let fetchRequest: NSFetchRequest<TopRatedMoviesEntity> = TopRatedMoviesEntity.fetchRequest()
         let movieEntitites = try context.fetch(fetchRequest)
         return movieEntitites.map { $0.toMovie() }
     }
     
     private func saveOnTheAirMoviesToCoreData(_ movies: [Movie]) throws {
-        try clearOnTheAirMoviesFromCoreData()
+        // try clearOnTheAirMoviesFromCoreData()
         for movie in movies {
             let movieEntity = movie.toOnTheAirMovieEntity(context: context)
             context.insert(movieEntity)
@@ -69,7 +73,7 @@ class MovieRepository: MovieRepositoryProtocol {
         try context.save()
     }
     
-    private func clearOnTheAirMoviesFromCoreData() throws {
+    func clearOnTheAirMoviesFromCoreData() throws {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = OnTheAirMoviesEntity.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         try context.execute(deleteRequest)
@@ -108,6 +112,10 @@ class MovieRepository: MovieRepositoryProtocol {
         
         UserDefaults.standard.set(Array(favorites), forKey: UserDefaultsKeys.favorites)
     }
+    
+    func resetNextPageToLoadOnTheAirMovies() {
+        self.nextOnTheAirPageToLoad = 1
+    }
 }
 
 struct MovieResponse: Decodable {
@@ -117,4 +125,11 @@ struct MovieResponse: Decodable {
 struct OnTheAirMoviesResponse: Decodable {
     let page: Int
     let results: [Movie]
+    let totalPages: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case page
+        case results
+        case totalPages = "total_pages"
+    }
 }

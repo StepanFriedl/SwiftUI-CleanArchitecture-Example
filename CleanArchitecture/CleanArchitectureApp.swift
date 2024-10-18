@@ -19,7 +19,6 @@ struct CleanArchitectureApp: App {
             getTopRatedMoviesUseCase: diContainer.getTopRatedMoviesUseCase,
             getOnTheAirMoviesUseCase: diContainer.getOnTheAirMoviesUseCase,
             refreshTopRatedMoviesUseCase: diContainer.refreshTopRatedMoviesUseCase,
-            refreshOnTheAirMoviesUseCase: diContainer.refreshOnTheAirMoviesUseCase,
             toggleFavoriteMovieUseCase: diContainer.toggleFavoriteMovieUseCase,
             getFavoriteMoviesUseCase: diContainer.getFavoriteMoviesUseCase
         ))

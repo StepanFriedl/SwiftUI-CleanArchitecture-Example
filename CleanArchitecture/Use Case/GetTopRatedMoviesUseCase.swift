@@ -15,20 +15,14 @@ class GetTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol {
         self.movieRepository = movieRepository
     }
     
-    func execute(refresh: Bool) async throws -> [Movie] {
-        let cachedMovies = try movieRepository.fetchTopRatedMoviesFromCoreData()
+    func load(useCached: Bool) async throws -> [Movie] {
+        var cachedMovies: [Movie] = []
+        if useCached {
+            cachedMovies = try movieRepository.fetchTopRatedMoviesFromCoreData()
+        }
         if cachedMovies.isEmpty {
             let movies = try await movieRepository.fetchTopRatedMovies()
             return movies
-        } else {
-            if refresh {
-                do {
-                    return try await movieRepository.fetchTopRatedMovies()
-                } catch {
-                    print("Error fetching top rated movies from API: \(error.localizedDescription)")
-                }
-                return cachedMovies
-            }
         }
         return cachedMovies
     }
