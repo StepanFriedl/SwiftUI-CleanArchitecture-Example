@@ -44,7 +44,12 @@ struct MoviesView: View {
                         MovieListView(
                             moviesViewModel: viewModel,
                             movies: viewModel.onTheAirMovies,
-                            refreshAction: viewModel.refreshOnTheAirMovies
+                            refreshAction: viewModel.refreshOnTheAirMovies,
+                            loadMoreAction: {
+                                Task {
+                                    await self.viewModel.loadNextOnTheAirMoviesPage()
+                                }
+                            }
                         )
                     }
                 }

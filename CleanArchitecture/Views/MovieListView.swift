@@ -11,6 +11,7 @@ struct MovieListView: View {
     @StateObject var moviesViewModel: MoviesViewModel
     let movies: [Movie]
     let refreshAction: () async -> Void
+    var loadMoreAction: (() async -> Void)? = nil
     var deleteAction: ((_: Int) -> Void)? = nil
     
     var body: some View {
@@ -20,11 +21,20 @@ struct MovieListView: View {
                     VStack(alignment: .leading) {
                         Text(movie.title)
                             .font(.headline)
-                        Text(movie.releaseDate)
+                        Text(movie.getReleaseYear())
                             .font(.subheadline)
                         Text(movie.overview)
                             .font(.body)
                             .lineLimit(3)
+                    }
+                    .onAppear {
+                        if movie == movies.last {
+                            if let loadMoreAction = loadMoreAction {
+                                Task {
+                                    await                                    loadMoreAction()
+                                }
+                            }
+                        }
                     }
                 }
                 .listRowBackground(Color.clear)

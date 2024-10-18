@@ -26,8 +26,6 @@
 		FD43C3062CB03DF800045907 /* CustomRefreshableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43C3052CB03DF800045907 /* CustomRefreshableView.swift */; };
 		FD470EF92CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD470EF82CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift */; };
 		FD470F032CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD470F022CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift */; };
-		FD67AE942CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE932CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift */; };
-		FD67AE962CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE952CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift */; };
 		FD67AE982CBD2B0C00071A84 /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE972CBD2B0C00071A84 /* MovieListView.swift */; };
 		FD67AE9A2CBD4C9600071A84 /* ToggleFavoriteMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE992CBD4C9600071A84 /* ToggleFavoriteMovieUseCase.swift */; };
 		FD67AE9C2CBD4F0900071A84 /* GetFavoriteMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67AE9B2CBD4F0900071A84 /* GetFavoriteMoviesUseCase.swift */; };
@@ -44,7 +42,6 @@
 		FDDED3B62CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3B52CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift */; };
 		FDDED3BA2CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3B92CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift */; };
 		FDDED3BC2CBE7E8F002B5E2C /* MockGetOnTheAirMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3BB2CBE7E8F002B5E2C /* MockGetOnTheAirMoviesUseCase.swift */; };
-		FDDED3BE2CBE7EB7002B5E2C /* MockRefreshOnTheAirMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3BD2CBE7EB7002B5E2C /* MockRefreshOnTheAirMoviesUseCase.swift */; };
 		FDDED3C02CBE7EDD002B5E2C /* MockToggleFavoriteMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3BF2CBE7EDD002B5E2C /* MockToggleFavoriteMovieUseCase.swift */; };
 		FDDED3C22CBE7F0D002B5E2C /* MockGetFavoriteMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3C12CBE7F0D002B5E2C /* MockGetFavoriteMoviesUseCase.swift */; };
 /* End PBXBuildFile section */
@@ -68,8 +65,6 @@
 		FD43C3052CB03DF800045907 /* CustomRefreshableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshableView.swift; sourceTree = "<group>"; };
 		FD470EF82CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOnTheAirMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
 		FD470F022CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOnTheAirMoviesUseCase.swift; sourceTree = "<group>"; };
-		FD67AE932CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshOnTheAirMoviesUseCase.swift; sourceTree = "<group>"; };
-		FD67AE952CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshOnTheAirMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
 		FD67AE972CBD2B0C00071A84 /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
 		FD67AE992CBD4C9600071A84 /* ToggleFavoriteMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleFavoriteMovieUseCase.swift; sourceTree = "<group>"; };
 		FD67AE9B2CBD4F0900071A84 /* GetFavoriteMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteMoviesUseCase.swift; sourceTree = "<group>"; };
@@ -88,7 +83,6 @@
 		FDDED3B52CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGetTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
 		FDDED3B92CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRefreshTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
 		FDDED3BB2CBE7E8F002B5E2C /* MockGetOnTheAirMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGetOnTheAirMoviesUseCase.swift; sourceTree = "<group>"; };
-		FDDED3BD2CBE7EB7002B5E2C /* MockRefreshOnTheAirMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRefreshOnTheAirMoviesUseCase.swift; sourceTree = "<group>"; };
 		FDDED3BF2CBE7EDD002B5E2C /* MockToggleFavoriteMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockToggleFavoriteMovieUseCase.swift; sourceTree = "<group>"; };
 		FDDED3C12CBE7F0D002B5E2C /* MockGetFavoriteMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGetFavoriteMoviesUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +121,6 @@
 				FD345BC22CA6CFC2005FE713 /* GetTopRatedMoviesUseCase.swift */,
 				FD43C3012CB0385B00045907 /* RefreshTopRatedMoviesUseCase.swift */,
 				FD470F022CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift */,
-				FD67AE932CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift */,
 				FD67AE992CBD4C9600071A84 /* ToggleFavoriteMovieUseCase.swift */,
 				FD67AE9B2CBD4F0900071A84 /* GetFavoriteMoviesUseCase.swift */,
 			);
@@ -178,7 +171,6 @@
 				FD345BBE2CA6B7B5005FE713 /* GetTopRatedMoviesUseCaseProtocol.swift */,
 				FD43C3032CB0387B00045907 /* RefreshTopRatedMoviesUseCaseProtocol.swift */,
 				FD470EF82CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift */,
-				FD67AE952CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift */,
 				FD2597CD2CBE664A0039BD0C /* ToggleFavoriteMovieUseCaseProtocol.swift */,
 				FD2597CF2CBE666D0039BD0C /* GetFavoriteMoviesUseCaseProtocol.swift */,
 			);
@@ -281,7 +273,6 @@
 				FDDED3B52CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift */,
 				FDDED3B92CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift */,
 				FDDED3BB2CBE7E8F002B5E2C /* MockGetOnTheAirMoviesUseCase.swift */,
-				FDDED3BD2CBE7EB7002B5E2C /* MockRefreshOnTheAirMoviesUseCase.swift */,
 				FDDED3BF2CBE7EDD002B5E2C /* MockToggleFavoriteMovieUseCase.swift */,
 				FDDED3C12CBE7F0D002B5E2C /* MockGetFavoriteMoviesUseCase.swift */,
 			);
@@ -384,8 +375,6 @@
 				FDDED3B42CBE7CDF002B5E2C /* MockMoviesViewModel.swift in Sources */,
 				FD470F032CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift in Sources */,
 				FD67AE982CBD2B0C00071A84 /* MovieListView.swift in Sources */,
-				FD67AE962CBD281D00071A84 /* RefreshOnTheAirMoviesUseCaseProtocol.swift in Sources */,
-				FDDED3BE2CBE7EB7002B5E2C /* MockRefreshOnTheAirMoviesUseCase.swift in Sources */,
 				FD2597D02CBE666D0039BD0C /* GetFavoriteMoviesUseCaseProtocol.swift in Sources */,
 				FD43C2FC2CB02D9400045907 /* URLHelpers.swift in Sources */,
 				FD345BBD2CA6B5E7005FE713 /* MovieRepositoryProtocol.swift in Sources */,
@@ -396,7 +385,6 @@
 				FD345BC72CA6D425005FE713 /* MoviesView.swift in Sources */,
 				FDDED3BA2CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift in Sources */,
 				FD470EF92CB6787D00578B04 /* GetOnTheAirMoviesUseCaseProtocol.swift in Sources */,
-				FD67AE942CBD280200071A84 /* RefreshOnTheAirMoviesUseCase.swift in Sources */,
 				FD43C2F62CB0219C00045907 /* MovieDetailsView.swift in Sources */,
 				FD345BC52CA6D398005FE713 /* MoviesViewModel.swift in Sources */,
 				FD7B025D2CA6E8280035DE19 /* FavoritesView.swift in Sources */,

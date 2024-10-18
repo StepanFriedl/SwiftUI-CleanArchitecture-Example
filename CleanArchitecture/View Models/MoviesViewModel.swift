@@ -26,7 +26,6 @@ class MoviesViewModel: ObservableObject {
     private let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
     private let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     private let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
-    private let refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
     private let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
     private let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     
@@ -34,20 +33,18 @@ class MoviesViewModel: ObservableObject {
         getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol,
         getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol,
         refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol,
-        refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol,
         toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol,
         getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     ) {
         self.getTopRatedMoviesUseCase = getTopRatedMoviesUseCase
         self.refreshTopRatedMoviesUseCase = refreshTopRatedMoviesUseCase
         self.getOnTheAirMoviesUseCase = getOnTheAirMoviesUseCase
-        self.refreshOnTheAirMoviesUseCase = refreshOnTheAirMoviesUseCase
         self.toggleFavoriteMovieUseCase = toggleFavoriteMovieUseCase
         self.getFavoriteMoviesUseCase = getFavoriteMoviesUseCase
         self.loadFavoriteMovies()
         Task {
-            await self.loadTopRatedMovies(refresh: true)
-            await self.loadOnTheAirMovies(refresh: true)
+            await self.loadTopRatedMovies(useCached: true)
+            await self.loadOnTheAirMovies(useCached: true)
             // TODO: - Add settings for this later
         }
     }
@@ -56,7 +53,6 @@ class MoviesViewModel: ObservableObject {
         do {
             favoriteMoviesList = try getFavoriteMoviesUseCase.execute()
         } catch {
-            print("Loading favorite movies failed")
             // TODO: - Add error handling
         }
     }
@@ -81,19 +77,18 @@ class MoviesViewModel: ObservableObject {
     
     func refreshOnTheAirMovies() async {
         do {
-            let refreshedMovies = try await refreshOnTheAirMoviesUseCase.refresh()
-            topRatedMovies = refreshedMovies
+            onTheAirMovies = try await getOnTheAirMoviesUseCase.load(useCached: false)
         } catch {
-            onTheAirErrorMessage = "Failed to refresh movies"
+
         }
     }
     
-    func loadOnTheAirMovies(refresh: Bool) async {
+    func loadOnTheAirMovies(useCached: Bool) async {
         DispatchQueue.main.async {
             self.isOnTheAirLoading = true
         }
         do {
-            onTheAirMovies = try await getOnTheAirMoviesUseCase.execute(refresh: refresh)
+            onTheAirMovies = try await getOnTheAirMoviesUseCase.load(useCached: useCached)
         } catch {
             onTheAirErrorMessage = "Failed to load movies"
         }
@@ -102,12 +97,20 @@ class MoviesViewModel: ObservableObject {
         }
     }
     
-    func loadTopRatedMovies(refresh: Bool) async {
+    func loadNextOnTheAirMoviesPage() async {
+        do {
+            onTheAirMovies.append(contentsOf: try await getOnTheAirMoviesUseCase.loadNextPage())
+        } catch {
+            
+        }
+    }
+    
+    func loadTopRatedMovies(useCached: Bool) async {
         DispatchQueue.main.async {
             self.isTopRatedLoading = true
         }
         do {
-            topRatedMovies = try await getTopRatedMoviesUseCase.execute(refresh: refresh)
+            topRatedMovies = try await getTopRatedMoviesUseCase.load(useCached: useCached)
         } catch {
             topRatedErrorMessage = "Failed to load movies"
         }

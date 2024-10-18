@@ -13,7 +13,6 @@ class DIContainer {
     let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
     let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
-    let refreshOnTheAirMoviesUseCase: RefreshOnTheAirMoviesUseCaseProtocol
     let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
     let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     
@@ -23,7 +22,6 @@ class DIContainer {
         getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
         refreshTopRatedMoviesUseCase = RefreshTopRatedMoviesUseCase(movieRepository: movieRepository)
         getOnTheAirMoviesUseCase = GetOnTheAirMoviesUseCase(movieRepository: movieRepository)
-        refreshOnTheAirMoviesUseCase = RefreshOnTheAirMoviesUseCase(movieRepository: movieRepository)
         toggleFavoriteMovieUseCase = ToggleFavoriteMovieUseCase(repository: movieRepository)
         getFavoriteMoviesUseCase = GetFavoriteMoviesUseCase(repository: movieRepository)
     }
