@@ -8,7 +8,7 @@
 import Foundation
 
 class MockToggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol {
-    func toggleFavorite(movieID: Int, deleteOnly: Bool = false) {
+    func toggleFavorite(movie: Movie, deleteOnly: Bool = false) {
         
     }
 }

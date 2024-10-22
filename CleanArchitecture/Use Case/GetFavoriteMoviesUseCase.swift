@@ -12,18 +12,13 @@ protocol GetFavoriteMoviesUseCaseProtocol {
 }
 
 class GetFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol {
-    private let repository: MovieRepositoryProtocol
+    private let repository: FavoritesRepositoryProtocol
     
-    init(repository: MovieRepositoryProtocol) {
+    init(repository: FavoritesRepositoryProtocol) {
         self.repository = repository
     }
     
     func execute() throws -> [Movie] {
-        let favoriteIDs = repository.getFavoriteMovieIDs()
-        let topRatedMovies = try repository.fetchTopRatedMoviesFromCoreData()
-        let onTheAirMovies = try repository.fetchOnTheAirMoviesFromCoreData()
-        let allMovies = topRatedMovies + onTheAirMovies
-        let uniqueMovies = Dictionary(grouping: allMovies, by: { $0.id }).compactMap { $0.value.first }
-        return uniqueMovies.filter { favoriteIDs.contains($0.id) }
+        try repository.fetchFavoriteMovies()
     }
 }

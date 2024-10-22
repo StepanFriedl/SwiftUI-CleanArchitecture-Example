@@ -92,7 +92,7 @@ struct MovieDetailsView: View {
     
     func favoriteButton() -> some View {
         Button {
-            viewModel.toggleFavorite(forID: movie.id)
+            viewModel.toggleFavorite(movie: movie)
         } label: {
             Image(systemName: viewModel.isFavorite(movieID: movie.id) ? "bookmark.fill" : "bookmark")
         }
