@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol GetTopRatedMoviesUseCaseProtocol {
+    func load(useCached: Bool) async throws -> [Movie]
+}
+
 class GetTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol {
     
     private let movieRepository: MovieRepositoryProtocol

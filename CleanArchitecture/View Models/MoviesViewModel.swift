@@ -34,7 +34,9 @@ class MoviesViewModel: ObservableObject {
         getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol,
         refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol,
         toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol,
-        getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
+        getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol,
+        onTheAirRefreshSettingsUseCase: OnTheAirRefreshSettingsUseCaseProtocol,
+        topRatedMoviesRefreshSettingsUseCase: TopRatedMoviesRefreshSettingsUseCaseProtocol
     ) {
         self.getTopRatedMoviesUseCase = getTopRatedMoviesUseCase
         self.refreshTopRatedMoviesUseCase = refreshTopRatedMoviesUseCase
@@ -43,9 +45,10 @@ class MoviesViewModel: ObservableObject {
         self.getFavoriteMoviesUseCase = getFavoriteMoviesUseCase
         self.loadFavoriteMovies()
         Task {
-            await self.loadTopRatedMovies(useCached: true)
-            await self.loadOnTheAirMovies(useCached: true)
-            // TODO: - Add settings for this later
+            let onTheAirRefreshSettings = onTheAirRefreshSettingsUseCase.getSettings()
+            let topRatedMoviesRefreshSettings = topRatedMoviesRefreshSettingsUseCase.getSettings()
+            await self.loadTopRatedMovies(useCached: !topRatedMoviesRefreshSettings)
+            await self.loadOnTheAirMovies(useCached: !onTheAirRefreshSettings)
         }
     }
     

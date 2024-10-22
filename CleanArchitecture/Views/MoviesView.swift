@@ -8,16 +8,28 @@
 import SwiftUI
 
 struct MoviesView: View {
-    @StateObject var viewModel: MoviesViewModel
+    @ObservedObject var viewModel: MoviesViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
     
     var body: some View {
         VStack {
-            Picker("Ranking type", selection: $viewModel.rankingType) {
-                ForEach(RankingType.allCases, id: \.self) { option in
-                    Text(option.rawValue)
+            HStack {
+                Picker("Ranking type", selection: $viewModel.rankingType) {
+                    ForEach(RankingType.allCases, id: \.self) { option in
+                        Text(option.rawValue)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.leading, 16)
+                
+                Button {
+                    settingsViewModel.showSettingsSheet = true
+                } label: {
+                    Image(systemName: "slider.horizontal.3")
+                        .foregroundStyle(.primary)
+                        .frame(width: 32)
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
             
             ZStack {
                 switch viewModel.rankingType {

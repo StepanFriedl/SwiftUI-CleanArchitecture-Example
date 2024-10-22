@@ -16,6 +16,10 @@ class DIContainer {
     let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
     let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
     
+    let onTheAirRefreshSettingsUseCase: OnTheAirRefreshSettingsUseCaseProtocol
+    let topRatedMoviesRefreshSettingsUseCase: TopRatedMoviesRefreshSettingsUseCaseProtocol
+    let settingsViewModel: SettingsViewModel
+    
     init() {
         persistenceController = PersistenceController()
         movieRepository = MovieRepository(context: persistenceController.container.viewContext)
@@ -24,5 +28,13 @@ class DIContainer {
         getOnTheAirMoviesUseCase = GetOnTheAirMoviesUseCase(movieRepository: movieRepository)
         toggleFavoriteMovieUseCase = ToggleFavoriteMovieUseCase(repository: movieRepository)
         getFavoriteMoviesUseCase = GetFavoriteMoviesUseCase(repository: movieRepository)
+        
+        let settingsRepository = SettingsRepository()
+        onTheAirRefreshSettingsUseCase = OnTheAirRefreshSettingsUseCase(settingsRepository: settingsRepository)
+        topRatedMoviesRefreshSettingsUseCase = TopRatedMoviesRefreshSettingsUseCase(settingsRepository: settingsRepository)
+        settingsViewModel = SettingsViewModel(
+            onTheAirRefreshSettingsUseCase: onTheAirRefreshSettingsUseCase,
+            topRatedMoviesRefreshSettingsUseCase: topRatedMoviesRefreshSettingsUseCase
+        )
     }
 }

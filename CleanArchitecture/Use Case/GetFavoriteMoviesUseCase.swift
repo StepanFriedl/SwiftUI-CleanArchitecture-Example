@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol GetFavoriteMoviesUseCaseProtocol {
+    func execute() throws -> [Movie]
+}
+
 class GetFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol {
     private let repository: MovieRepositoryProtocol
     
