@@ -60,8 +60,8 @@ class MoviesViewModel: ObservableObject {
         }
     }
     
-    func toggleFavorite(forID movieID: Int, deleteOnly: Bool = false) {
-        toggleFavoriteMovieUseCase.toggleFavorite(movieID: movieID, deleteOnly: deleteOnly)
+    func toggleFavorite(movie: Movie, deleteOnly: Bool = false) {
+        toggleFavoriteMovieUseCase.toggleFavorite(movie: movie, deleteOnly: deleteOnly)
         loadFavoriteMovies()
     }
     

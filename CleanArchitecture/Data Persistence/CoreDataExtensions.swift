@@ -8,31 +8,18 @@
 import Foundation
 import CoreData
 
-extension Movie {
-    func toTopRatedMovieEntity(context: NSManagedObjectContext) -> TopRatedMoviesEntity {
-        let movieEntity = TopRatedMoviesEntity(context: context)
-        movieEntity.id = Int64(self.id)
-        movieEntity.title = self.title
-        movieEntity.overview = self.overview
-        movieEntity.posterPath = self.posterPath
-        movieEntity.releaseDate = self.releaseDate
-        movieEntity.voteAverage = self.voteAverage
-        return movieEntity
-    }
+protocol MovieEntityProtocol {
+    var id: Int64 { get set }
+    var title: String? { get set }
+    var overview: String? { get set }
+    var posterPath: String? { get set }
+    var releaseDate: String? { get set }
+    var voteAverage: Double { get set }
     
-    func toOnTheAirMovieEntity(context: NSManagedObjectContext) -> OnTheAirMoviesEntity {
-        let movieEntity = OnTheAirMoviesEntity(context: context)
-        movieEntity.id = Int64(self.id)
-        movieEntity.title = self.title
-        movieEntity.overview = self.overview
-        movieEntity.posterPath = self.posterPath
-        movieEntity.releaseDate = self.releaseDate
-        movieEntity.voteAverage = self.voteAverage
-        return movieEntity
-    }
+    func toMovie() -> Movie
 }
 
-extension OnTheAirMoviesEntity {
+extension MovieEntityProtocol {
     func toMovie() -> Movie {
         return Movie(
             id: Int(self.id),
@@ -45,15 +32,19 @@ extension OnTheAirMoviesEntity {
     }
 }
 
-extension TopRatedMoviesEntity {
-    func toMovie() -> Movie {
-        return Movie(
-            id: Int(self.id),
-            title: self.title ?? "",
-            overview: self.overview ?? "",
-            posterPath: self.posterPath,
-            releaseDate: self.releaseDate ?? "",
-            voteAverage: self.voteAverage
-        )
+extension Movie {
+    func toEntity<T: NSManagedObject & MovieEntityProtocol>(entityType: T.Type, context: NSManagedObjectContext) -> T {
+        var entity = T(context: context)
+        entity.id = Int64(self.id)
+        entity.title = self.title
+        entity.overview = self.overview
+        entity.posterPath = self.posterPath
+        entity.releaseDate = self.releaseDate
+        entity.voteAverage = self.voteAverage
+        return entity
     }
 }
+
+extension TopRatedMoviesEntity: MovieEntityProtocol {}
+extension OnTheAirMoviesEntity: MovieEntityProtocol {}
+extension FavoriteMoviesEntity: MovieEntityProtocol {}

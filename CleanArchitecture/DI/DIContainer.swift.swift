@@ -10,6 +10,7 @@ import Foundation
 class DIContainer {
     let persistenceController: PersistenceController
     let movieRepository: MovieRepositoryProtocol
+    let favoritesRepository: FavoritesRepositoryProtocol
     let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
     let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
@@ -23,12 +24,12 @@ class DIContainer {
     init() {
         persistenceController = PersistenceController()
         movieRepository = MovieRepository(context: persistenceController.container.viewContext)
+        favoritesRepository = FavoritesRepository(context: persistenceController.container.viewContext)
         getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository: movieRepository)
         refreshTopRatedMoviesUseCase = RefreshTopRatedMoviesUseCase(movieRepository: movieRepository)
         getOnTheAirMoviesUseCase = GetOnTheAirMoviesUseCase(movieRepository: movieRepository)
-        toggleFavoriteMovieUseCase = ToggleFavoriteMovieUseCase(repository: movieRepository)
-        getFavoriteMoviesUseCase = GetFavoriteMoviesUseCase(repository: movieRepository)
-        
+        toggleFavoriteMovieUseCase = ToggleFavoriteMovieUseCase(repository: favoritesRepository)
+        getFavoriteMoviesUseCase = GetFavoriteMoviesUseCase(repository: favoritesRepository)
         let settingsRepository = SettingsRepository()
         onTheAirRefreshSettingsUseCase = OnTheAirRefreshSettingsUseCase(settingsRepository: settingsRepository)
         topRatedMoviesRefreshSettingsUseCase = TopRatedMoviesRefreshSettingsUseCase(settingsRepository: settingsRepository)

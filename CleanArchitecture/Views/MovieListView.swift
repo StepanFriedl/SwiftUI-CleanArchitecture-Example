@@ -12,7 +12,7 @@ struct MovieListView: View {
     let movies: [Movie]
     let refreshAction: () async -> Void
     var loadMoreAction: (() async -> Void)? = nil
-    var deleteAction: ((_: Int) -> Void)? = nil
+    var deleteAction: ((_: Movie) -> Void)? = nil
     
     var body: some View {
         if movies.count > 0 {
@@ -41,7 +41,7 @@ struct MovieListView: View {
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     if let deleteAction = deleteAction {
                         Button(role: .destructive) {
-                            deleteAction(movie.id)
+                            deleteAction(movie)
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }

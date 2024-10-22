@@ -17,8 +17,8 @@ struct FavoritesView: View {
                     moviesViewModel: viewModel,
                     movies: viewModel.favoriteMoviesList,
                     refreshAction: viewModel.loadFavoriteMovies,
-                    deleteAction: { movieID in
-                        viewModel.toggleFavorite(forID: movieID, deleteOnly: true)
+                    deleteAction: { movie in
+                        viewModel.toggleFavorite(movie: movie,deleteOnly: true)
                     }
                 )
             } else {

@@ -13,9 +13,6 @@ protocol MovieRepositoryProtocol {
     func fetchTopRatedMoviesFromCoreData() throws -> [Movie]
     func fetchOnTheAirMovies() async throws -> [Movie]
     func fetchOnTheAirMoviesFromCoreData() throws -> [Movie]
-    func getFavoriteMovieIDs() -> Set<Int>
-    func saveFavoriteMovieID(_ movieID: Int)
-    func removeFavoriteMovieID(_ movieID: Int)
     func resetNextPageToLoadOnTheAirMovies()
     func clearOnTheAirMoviesFromCoreData() throws
 }
@@ -83,7 +80,7 @@ class MovieRepository: MovieRepositoryProtocol {
     private func saveOnTheAirMoviesToCoreData(_ movies: [Movie]) throws {
         // try clearOnTheAirMoviesFromCoreData()
         for movie in movies {
-            let movieEntity = movie.toOnTheAirMovieEntity(context: context)
+            let movieEntity = movie.toEntity(entityType: OnTheAirMoviesEntity.self, context: context)
             context.insert(movieEntity)
         }
         try context.save()
@@ -98,7 +95,7 @@ class MovieRepository: MovieRepositoryProtocol {
     private func saveTopRatedMoviesToCoreData(_ movies: [Movie]) throws {
         try clearTopRatedMoviesFromCoreData()
         for movie in movies {
-            let movieEntity = movie.toTopRatedMovieEntity(context: context)
+            let movieEntity = movie.toEntity(entityType: TopRatedMoviesEntity.self, context: context)
             context.insert(movieEntity)
         }
         try context.save()
@@ -108,25 +105,6 @@ class MovieRepository: MovieRepositoryProtocol {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = TopRatedMoviesEntity.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         try context.execute(deleteRequest)
-    }
-    
-    func getFavoriteMovieIDs() -> Set<Int> {
-        guard let savedFavoriteIDs = UserDefaults.standard.array(forKey: UserDefaultsKeys.favorites) as? [Int] else { return [] }
-        return Set(savedFavoriteIDs)
-    }
-    
-    func saveFavoriteMovieID(_ movieID: Int) {
-        var favorites = self.getFavoriteMovieIDs()
-        favorites.insert(movieID)
-        
-        UserDefaults.standard.set(Array(favorites), forKey: UserDefaultsKeys.favorites)
-    }
-    
-    func removeFavoriteMovieID(_ movieID: Int) {
-        var favorites = self.getFavoriteMovieIDs()
-        favorites.remove(movieID)
-        
-        UserDefaults.standard.set(Array(favorites), forKey: UserDefaultsKeys.favorites)
     }
     
     func resetNextPageToLoadOnTheAirMovies() {
