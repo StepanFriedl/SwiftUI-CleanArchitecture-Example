@@ -11,7 +11,8 @@ import SwiftUI
 struct CleanArchitectureApp: App {
     private var diContainer: DIContainer
     @StateObject private var viewModel: MoviesViewModel
-
+    @StateObject private var settingsViewModel: SettingsViewModel
+    
     init() {
         let diContainer = DIContainer()
         self.diContainer = diContainer
@@ -20,24 +21,33 @@ struct CleanArchitectureApp: App {
             getOnTheAirMoviesUseCase: diContainer.getOnTheAirMoviesUseCase,
             refreshTopRatedMoviesUseCase: diContainer.refreshTopRatedMoviesUseCase,
             toggleFavoriteMovieUseCase: diContainer.toggleFavoriteMovieUseCase,
-            getFavoriteMoviesUseCase: diContainer.getFavoriteMoviesUseCase
+            getFavoriteMoviesUseCase: diContainer.getFavoriteMoviesUseCase,
+            onTheAirRefreshSettingsUseCase: diContainer.onTheAirRefreshSettingsUseCase,
+            topRatedMoviesRefreshSettingsUseCase: diContainer.topRatedMoviesRefreshSettingsUseCase
         ))
+        _settingsViewModel = StateObject(wrappedValue: diContainer.settingsViewModel)
     }
-
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 TabView {
-                    MoviesView(viewModel: viewModel)
-                        .tabItem {
-                            Label("Movies", systemImage: "film")
-                        }
+                    MoviesView(
+                        viewModel: viewModel,
+                        settingsViewModel: settingsViewModel
+                    )
+                    .tabItem {
+                        Label("Movies", systemImage: "film")
+                    }
                     
                     FavoritesView(viewModel: viewModel)
                         .tabItem {
                             Label("Favorites", systemImage: "star.fill")
                         }
                 }
+            }
+            .sheet(isPresented: $settingsViewModel.showSettingsSheet) {
+                SettingsView(settingsViewModel: settingsViewModel)
             }
         }
     }

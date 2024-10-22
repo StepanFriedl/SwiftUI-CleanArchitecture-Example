@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol RefreshTopRatedMoviesUseCaseProtocol {
+    func refresh() async throws -> [Movie]
+}
+
 class RefreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol {
     private let movieRepository: MovieRepositoryProtocol
     

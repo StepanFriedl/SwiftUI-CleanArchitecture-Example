@@ -16,5 +16,6 @@ struct Urls {
 
 struct UserDefaultsKeys {
     static let favorites = "favoriteMovies"
-
+    static let topRatedMoviesRefreshSettings = "topRatedMoviesRefreshSettings"
+    static let onTheAirMoviesRefreshSettings = "onTheAirMoviesRefreshSettings"
 }

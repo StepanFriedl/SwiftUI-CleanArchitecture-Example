@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol GetOnTheAirMoviesUseCaseProtocol {
+    func load(useCached: Bool) async throws -> [Movie]
+    func loadNextPage() async throws -> [Movie]
+}
+
+
 class GetOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol {
     
     private let movieRepository: MovieRepositoryProtocol

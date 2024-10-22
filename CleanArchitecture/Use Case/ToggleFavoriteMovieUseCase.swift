@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol ToggleFavoriteMovieUseCaseProtocol {
+    func toggleFavorite(movieID: Int, deleteOnly: Bool)
+}
+
 class ToggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol {
     private let repository: MovieRepositoryProtocol
     

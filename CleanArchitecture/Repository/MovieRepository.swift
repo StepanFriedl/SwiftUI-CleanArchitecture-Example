@@ -8,6 +8,18 @@
 import CoreData
 import SwiftUI
 
+protocol MovieRepositoryProtocol {
+    func fetchTopRatedMovies() async throws -> [Movie]
+    func fetchTopRatedMoviesFromCoreData() throws -> [Movie]
+    func fetchOnTheAirMovies() async throws -> [Movie]
+    func fetchOnTheAirMoviesFromCoreData() throws -> [Movie]
+    func getFavoriteMovieIDs() -> Set<Int>
+    func saveFavoriteMovieID(_ movieID: Int)
+    func removeFavoriteMovieID(_ movieID: Int)
+    func resetNextPageToLoadOnTheAirMovies()
+    func clearOnTheAirMoviesFromCoreData() throws
+}
+
 class MovieRepository: MovieRepositoryProtocol {
     @AppStorage("nextOnTheAirPageToLoad") var nextOnTheAirPageToLoad: Int = 1
     @AppStorage("totalOnTheAirPages") var totalOnTheAirPages: Int = 999
@@ -20,6 +32,7 @@ class MovieRepository: MovieRepositoryProtocol {
     }
     
     func fetchOnTheAirMovies() async throws -> [Movie] {
+        print("Going to fetch on the air movies.")
         guard nextOnTheAirPageToLoad <= totalOnTheAirPages else {
             return []
         }
@@ -40,6 +53,7 @@ class MovieRepository: MovieRepositoryProtocol {
     }
     
     func fetchTopRatedMovies() async throws -> [Movie] {
+        print("Going to fetch top rated movies.")
         let urlString = "\(Urls.serverURL)\(Urls.topRated)?api_key=\(apiKey)"
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
@@ -53,12 +67,14 @@ class MovieRepository: MovieRepositoryProtocol {
     }
     
     func fetchOnTheAirMoviesFromCoreData() throws -> [Movie] {
+        print("Going to fetch CoreData’s on the air movies.")
         let fetchRequest: NSFetchRequest<OnTheAirMoviesEntity> = OnTheAirMoviesEntity.fetchRequest()
         let moviesEntity = try context.fetch(fetchRequest)
         return moviesEntity.map { $0.toMovie() }
     }
     
     func fetchTopRatedMoviesFromCoreData() throws -> [Movie] {
+        print("Going to fetch CoreData’s top rated movies.")
         let fetchRequest: NSFetchRequest<TopRatedMoviesEntity> = TopRatedMoviesEntity.fetchRequest()
         let movieEntitites = try context.fetch(fetchRequest)
         return movieEntitites.map { $0.toMovie() }
