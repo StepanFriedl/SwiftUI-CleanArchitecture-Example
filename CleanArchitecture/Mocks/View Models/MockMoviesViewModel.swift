@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-class MockMoviesViewModel: MoviesViewModel { 
+class MockMoviesViewModel: MoviesViewModel {
     init() {
         super.init(
             getTopRatedMoviesUseCase: MockGetTopRatedMoviesUseCase(),
@@ -17,7 +17,9 @@ class MockMoviesViewModel: MoviesViewModel {
             toggleFavoriteMovieUseCase: MockToggleFavoriteMovieUseCase(),
             getFavoriteMoviesUseCase: MockGetFavoriteMoviesUseCase(),
             onTheAirRefreshSettingsUseCase: MockOnTheAirRefreshSettingsUseCase(),
-            topRatedMoviesRefreshSettingsUseCase: MockTopRatedRefreshSettingsUseCase()
+            topRatedMoviesRefreshSettingsUseCase: MockTopRatedRefreshSettingsUseCase(),
+            sortMoviesUseCase: MockSortMoviesUseCase(),
+            filterMoviesUseCase: MockFilterMoviesUseCase()
         )
 
         self.topRatedMovies = [

@@ -8,17 +8,22 @@
 import Foundation
 
 class DIContainer {
+    // persistence
     let persistenceController: PersistenceController
+    // repositories
     let movieRepository: MovieRepositoryProtocol
     let favoritesRepository: FavoritesRepositoryProtocol
+    // use cases
     let getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol
     let refreshTopRatedMoviesUseCase: RefreshTopRatedMoviesUseCaseProtocol
     let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
     let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
     let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
-    
     let onTheAirRefreshSettingsUseCase: OnTheAirRefreshSettingsUseCaseProtocol
     let topRatedMoviesRefreshSettingsUseCase: TopRatedMoviesRefreshSettingsUseCaseProtocol
+    let sortMoviesUseCase: SortMoviesUseCaseProtocol
+    let filterMoviesUseCase: FilterMoviesUseCaseProtocol
+    // view models
     let settingsViewModel: SettingsViewModel
     
     init() {
@@ -33,6 +38,8 @@ class DIContainer {
         let settingsRepository = SettingsRepository()
         onTheAirRefreshSettingsUseCase = OnTheAirRefreshSettingsUseCase(settingsRepository: settingsRepository)
         topRatedMoviesRefreshSettingsUseCase = TopRatedMoviesRefreshSettingsUseCase(settingsRepository: settingsRepository)
+        sortMoviesUseCase = SortMoviesUseCase()
+        filterMoviesUseCase = FilterMoviesUseCase()
         settingsViewModel = SettingsViewModel(
             onTheAirRefreshSettingsUseCase: onTheAirRefreshSettingsUseCase,
             topRatedMoviesRefreshSettingsUseCase: topRatedMoviesRefreshSettingsUseCase

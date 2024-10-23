@@ -23,7 +23,9 @@ struct CleanArchitectureApp: App {
             toggleFavoriteMovieUseCase: diContainer.toggleFavoriteMovieUseCase,
             getFavoriteMoviesUseCase: diContainer.getFavoriteMoviesUseCase,
             onTheAirRefreshSettingsUseCase: diContainer.onTheAirRefreshSettingsUseCase,
-            topRatedMoviesRefreshSettingsUseCase: diContainer.topRatedMoviesRefreshSettingsUseCase
+            topRatedMoviesRefreshSettingsUseCase: diContainer.topRatedMoviesRefreshSettingsUseCase,
+            sortMoviesUseCase: diContainer.sortMoviesUseCase,
+            filterMoviesUseCase: diContainer.filterMoviesUseCase
         ))
         _settingsViewModel = StateObject(wrappedValue: diContainer.settingsViewModel)
     }
