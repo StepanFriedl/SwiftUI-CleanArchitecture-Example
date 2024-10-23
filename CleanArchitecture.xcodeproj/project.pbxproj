@@ -41,6 +41,12 @@
 		FDB752062CAC34F0002EF118 /* AppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDB752042CAC34F0002EF118 /* AppDataModel.xcdatamodeld */; };
 		FDB752082CAC446E002EF118 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB752072CAC446E002EF118 /* PersistenceController.swift */; };
 		FDB7520A2CAC4546002EF118 /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB752092CAC4546002EF118 /* CoreDataExtensions.swift */; };
+		FDBC746A2CC9098F0015B878 /* SortMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC74692CC9098F0015B878 /* SortMoviesUseCase.swift */; };
+		FDBC746C2CC90B2E0015B878 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC746B2CC90B2E0015B878 /* SortOption.swift */; };
+		FDBC746E2CC90B550015B878 /* RankingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC746D2CC90B550015B878 /* RankingType.swift */; };
+		FDBC74702CC90B930015B878 /* FilterMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC746F2CC90B930015B878 /* FilterMoviesUseCase.swift */; };
+		FDBC74722CC90D130015B878 /* MockSortMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC74712CC90D130015B878 /* MockSortMoviesUseCase.swift */; };
+		FDBC74742CC90D370015B878 /* MockFilterMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC74732CC90D370015B878 /* MockFilterMoviesUseCase.swift */; };
 		FDDED3B42CBE7CDF002B5E2C /* MockMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3B32CBE7CDF002B5E2C /* MockMoviesViewModel.swift */; };
 		FDDED3B62CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3B52CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift */; };
 		FDDED3BA2CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDED3B92CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift */; };
@@ -85,6 +91,12 @@
 		FDB752052CAC34F0002EF118 /* AppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppDataModel.xcdatamodel; sourceTree = "<group>"; };
 		FDB752072CAC446E002EF118 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		FDB752092CAC4546002EF118 /* CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtensions.swift; sourceTree = "<group>"; };
+		FDBC74692CC9098F0015B878 /* SortMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMoviesUseCase.swift; sourceTree = "<group>"; };
+		FDBC746B2CC90B2E0015B878 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
+		FDBC746D2CC90B550015B878 /* RankingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingType.swift; sourceTree = "<group>"; };
+		FDBC746F2CC90B930015B878 /* FilterMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMoviesUseCase.swift; sourceTree = "<group>"; };
+		FDBC74712CC90D130015B878 /* MockSortMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSortMoviesUseCase.swift; sourceTree = "<group>"; };
+		FDBC74732CC90D370015B878 /* MockFilterMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilterMoviesUseCase.swift; sourceTree = "<group>"; };
 		FDDED3B32CBE7CDF002B5E2C /* MockMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMoviesViewModel.swift; sourceTree = "<group>"; };
 		FDDED3B52CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGetTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
 		FDDED3B92CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRefreshTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
@@ -105,12 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD345BB22CA6B094005FE713 /* Model */ = {
+		FD345BB22CA6B094005FE713 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				FD345BB72CA6B144005FE713 /* Movie.swift */,
+				FDBC746B2CC90B2E0015B878 /* SortOption.swift */,
+				FDBC746D2CC90B550015B878 /* RankingType.swift */,
 			);
-			path = Model;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		FD345BB32CA6B09B005FE713 /* Repository */ = {
@@ -133,6 +147,8 @@
 				FD67AE9B2CBD4F0900071A84 /* GetFavoriteMoviesUseCase.swift */,
 				FD093F9D2CC657850031497C /* OnTheAirRefreshSettingsUseCase.swift */,
 				FD093F9F2CC666AB0031497C /* TopRatedMoviesRefreshSettingsUseCase.swift */,
+				FDBC74692CC9098F0015B878 /* SortMoviesUseCase.swift */,
+				FDBC746F2CC90B930015B878 /* FilterMoviesUseCase.swift */,
 			);
 			path = "Use Case";
 			sourceTree = "<group>";
@@ -195,7 +211,7 @@
 				FD345BB52CA6B0A7005FE713 /* View Models */,
 				FD345BB42CA6B0A0005FE713 /* Use Case */,
 				FD345BB32CA6B09B005FE713 /* Repository */,
-				FD345BB22CA6B094005FE713 /* Model */,
+				FD345BB22CA6B094005FE713 /* Entities */,
 				FDDED3B02CBE7C82002B5E2C /* Mocks */,
 				FD9B71832CA6AE2700374AA9 /* CleanArchitectureApp.swift */,
 				FD74288E2CABF011004291BF /* Info.plist */,
@@ -260,6 +276,8 @@
 				FDDED3C12CBE7F0D002B5E2C /* MockGetFavoriteMoviesUseCase.swift */,
 				FD093FA72CC68EA70031497C /* MockOnTheAirRefreshSettingsUseCase.swift */,
 				FD093FA92CC68EF30031497C /* MockTopRatedRefreshSettingsUseCase.swift */,
+				FDBC74712CC90D130015B878 /* MockSortMoviesUseCase.swift */,
+				FDBC74732CC90D370015B878 /* MockFilterMoviesUseCase.swift */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -343,10 +361,12 @@
 			files = (
 				FD093FAA2CC68EF30031497C /* MockTopRatedRefreshSettingsUseCase.swift in Sources */,
 				FD43C3002CB032F600045907 /* StarRatingView.swift in Sources */,
+				FDBC746C2CC90B2E0015B878 /* SortOption.swift in Sources */,
 				FD345BC32CA6CFC2005FE713 /* GetTopRatedMoviesUseCase.swift in Sources */,
 				FD43C3062CB03DF800045907 /* CustomRefreshableView.swift in Sources */,
 				FDDED3B62CBE7CEF002B5E2C /* MockGetTopRatedMoviesUseCase.swift in Sources */,
 				FD093FA02CC666AB0031497C /* TopRatedMoviesRefreshSettingsUseCase.swift in Sources */,
+				FDBC746A2CC9098F0015B878 /* SortMoviesUseCase.swift in Sources */,
 				FDB7520A2CAC4546002EF118 /* CoreDataExtensions.swift in Sources */,
 				FD318CB82CC7C45B00520390 /* FavoritesRepository.swift in Sources */,
 				FDDED3C22CBE7F0D002B5E2C /* MockGetFavoriteMoviesUseCase.swift in Sources */,
@@ -358,9 +378,11 @@
 				FD093FA62CC68E5F0031497C /* MockSettingsViewModel.swift in Sources */,
 				FD67AE9A2CBD4C9600071A84 /* ToggleFavoriteMovieUseCase.swift in Sources */,
 				FD43C2FE2CB02DD800045907 /* Constants.swift in Sources */,
+				FDBC74722CC90D130015B878 /* MockSortMoviesUseCase.swift in Sources */,
 				FDDED3B42CBE7CDF002B5E2C /* MockMoviesViewModel.swift in Sources */,
 				FD470F032CB6C17400578B04 /* GetOnTheAirMoviesUseCase.swift in Sources */,
 				FD67AE982CBD2B0C00071A84 /* MovieListView.swift in Sources */,
+				FDBC74702CC90B930015B878 /* FilterMoviesUseCase.swift in Sources */,
 				FD43C2FC2CB02D9400045907 /* URLHelpers.swift in Sources */,
 				FD093FA22CC6677F0031497C /* SettingsViewModel.swift in Sources */,
 				FD093F9E2CC657850031497C /* OnTheAirRefreshSettingsUseCase.swift in Sources */,
@@ -373,6 +395,8 @@
 				FD093FA42CC68DA00031497C /* SettingsView.swift in Sources */,
 				FD345BC72CA6D425005FE713 /* MoviesView.swift in Sources */,
 				FDDED3BA2CBE7E53002B5E2C /* MockRefreshTopRatedMoviesUseCase.swift in Sources */,
+				FDBC74742CC90D370015B878 /* MockFilterMoviesUseCase.swift in Sources */,
+				FDBC746E2CC90B550015B878 /* RankingType.swift in Sources */,
 				FD43C2F62CB0219C00045907 /* MovieDetailsView.swift in Sources */,
 				FD345BC52CA6D398005FE713 /* MoviesViewModel.swift in Sources */,
 				FD7B025D2CA6E8280035DE19 /* FavoritesView.swift in Sources */,

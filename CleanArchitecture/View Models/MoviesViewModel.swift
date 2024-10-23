@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum RankingType: String, CaseIterable {
-    case topRated = "Top Rated"
-    case onTheAir = "On the Air"
-}
-
 @MainActor
 class MoviesViewModel: ObservableObject {
     @Published var topRatedMovies: [Movie] = []
@@ -28,6 +23,8 @@ class MoviesViewModel: ObservableObject {
     private let getOnTheAirMoviesUseCase: GetOnTheAirMoviesUseCaseProtocol
     private let toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol
     private let getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol
+    private let sortMoviesUseCase: SortMoviesUseCaseProtocol
+    private let filterMoviesUseCase: FilterMoviesUseCaseProtocol
     
     init(
         getTopRatedMoviesUseCase: GetTopRatedMoviesUseCaseProtocol,
@@ -36,13 +33,17 @@ class MoviesViewModel: ObservableObject {
         toggleFavoriteMovieUseCase: ToggleFavoriteMovieUseCaseProtocol,
         getFavoriteMoviesUseCase: GetFavoriteMoviesUseCaseProtocol,
         onTheAirRefreshSettingsUseCase: OnTheAirRefreshSettingsUseCaseProtocol,
-        topRatedMoviesRefreshSettingsUseCase: TopRatedMoviesRefreshSettingsUseCaseProtocol
+        topRatedMoviesRefreshSettingsUseCase: TopRatedMoviesRefreshSettingsUseCaseProtocol,
+        sortMoviesUseCase: SortMoviesUseCaseProtocol,
+        filterMoviesUseCase: FilterMoviesUseCaseProtocol
     ) {
         self.getTopRatedMoviesUseCase = getTopRatedMoviesUseCase
         self.refreshTopRatedMoviesUseCase = refreshTopRatedMoviesUseCase
         self.getOnTheAirMoviesUseCase = getOnTheAirMoviesUseCase
         self.toggleFavoriteMovieUseCase = toggleFavoriteMovieUseCase
         self.getFavoriteMoviesUseCase = getFavoriteMoviesUseCase
+        self.sortMoviesUseCase = sortMoviesUseCase
+        self.filterMoviesUseCase = filterMoviesUseCase
         self.loadFavoriteMovies()
         Task {
             let onTheAirRefreshSettings = onTheAirRefreshSettingsUseCase.getSettings()
@@ -120,5 +121,13 @@ class MoviesViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.isTopRatedLoading = false
         }
+    }
+    
+    func sortMovies(movies: [Movie], sortBy: SortOption) -> [Movie] {
+        sortMoviesUseCase.sortMovies(movies: movies, sortBy: sortBy)
+    }
+    
+    func filterMovies(movies: [Movie], query: String) -> [Movie] {
+        filterMoviesUseCase.filterMovies(movies: movies, query: query)
     }
 }
