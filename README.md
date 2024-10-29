@@ -35,32 +35,44 @@ The project follows Clean Architecture principles:
 
 ```
 CleanArchitectureExample/
-│
-├── Protocols/
-│   ├── UseCase/
-│   │   └── GetTopRatedMoviesUseCaseProtocol.swift
-│   └── Repository/
-│       └── MovieRepositoryProtocol.swift
-│
-├── UseCase/
-│   └── GetTopRatedMoviesUseCase.swift
-│
-├── Repository/
-│   └── MovieRepository.swift
-│
-├── ViewModels/
-│   └── MoviesViewModel.swift
-│
-├── Views/
-│   ├── MoviesView.swift
-│   └── FavoritesView.swift
-│
-├── Entities/
-│   └── Movie.swift
-│
-├── Config.xcconfig (not included)
-└── Resources/
-    └── Assets/
+├── Helpers
+Contains utility functions and constants shared across the project.
+
+├── DI
+Houses the dependency injection container, managing dependencies throughout the app.
+
+├── Data Persistence
+Responsible for Core Data management, including the data model, persistence controller, and Core Data-specific extensions.
+
+├── Views
+Contains SwiftUI views, including screens for movies, favorites, movie details, custom components, and settings.
+
+├── View Models
+Manages the UI logic and binds the views to the use cases for data and interaction handling.
+
+├── Use Case
+Implements business logic for various app functionalities, such as fetching, refreshing, sorting, and filtering movies, as well as managing user settings.
+
+├── Repository
+Acts as the data source layer, interacting with APIs, Core Data, and other storage solutions to fetch and store data.
+
+├── Entities
+Defines the data models used across the app, representing core concepts like movies, sorting options, and ranking types.
+
+├── Mocks
+Provides mock implementations of use cases and view models to facilitate testing.
+
+├── CleanArchitectureApp.swift
+The main entry point for the app, setting up the initial view and configurations.
+
+├── Info.plist
+Contains app configuration settings.
+
+├── Assets.xcassets
+Holds image assets and other resources used in the UI.
+
+└── Config.xcconfig
+Stores configuration values such as API keys and environment settings.
 ```
 
 ### Layers Explained
